@@ -33,14 +33,14 @@ public class DataStore implements DataStoreGetListener, DataStorePutListener {
 
     @Override
     public int onDataStorePut(String name, byte[] buffer, boolean secure) {
-        Log.d(TAG, "Writing File: " + name + ", to: " + this.context.getFilesDir());
+        Log.d(TAG, "Writing File: " + name + ", to: " + this.context.createDeviceProtectedStorageContext().getFilesDir());
         // 保护自定义 Planet 文件
         if (hookPlanetFile(name)) {
             return 0;
         }
         try {
             if (name.contains("/")) {
-                File file = new File(this.context.getFilesDir(), name.substring(0, name.lastIndexOf('/')));
+                File file = new File(this.context.createDeviceProtectedStorageContext().getFilesDir(), name.substring(0, name.lastIndexOf('/')));
                 if (!file.exists()) {
                     file.mkdirs();
                 }
@@ -50,7 +50,7 @@ public class DataStore implements DataStoreGetListener, DataStorePutListener {
                 fileOutputStream.close();
                 return 0;
             }
-            FileOutputStream openFileOutput = this.context.openFileOutput(name, 0);
+            FileOutputStream openFileOutput = this.context.createDeviceProtectedStorageContext().openFileOutput(name, 0);
             openFileOutput.write(buffer);
             openFileOutput.flush();
             openFileOutput.close();
@@ -80,14 +80,14 @@ public class DataStore implements DataStoreGetListener, DataStorePutListener {
             return 0;
         }
         if (name.contains("/")) {
-            File file = new File(this.context.getFilesDir(), name);
+            File file = new File(this.context.createDeviceProtectedStorageContext().getFilesDir(), name);
             if (!file.exists()) {
                 deleted = true;
             } else {
                 deleted = file.delete();
             }
         } else {
-            deleted = this.context.deleteFile(name);
+            deleted = this.context.createDeviceProtectedStorageContext().deleteFile(name);
         }
         return !deleted ? 1 : 0;
     }
@@ -101,7 +101,7 @@ public class DataStore implements DataStoreGetListener, DataStorePutListener {
         // 读入文件
         try {
             if (name.contains("/")) {
-                File file = new File(this.context.getFilesDir(), name.substring(0, name.lastIndexOf('/')));
+                File file = new File(this.context.createDeviceProtectedStorageContext().getFilesDir(), name.substring(0, name.lastIndexOf('/')));
                 if (!file.exists()) {
                     file.mkdirs();
                 }
@@ -114,7 +114,7 @@ public class DataStore implements DataStoreGetListener, DataStorePutListener {
                 fileInputStream.close();
                 return read;
             }
-            FileInputStream openFileInput = this.context.openFileInput(name);
+            FileInputStream openFileInput = this.context.createDeviceProtectedStorageContext().openFileInput(name);
             int read2 = openFileInput.read(out_buffer);
             openFileInput.close();
             return read2;
@@ -135,7 +135,7 @@ public class DataStore implements DataStoreGetListener, DataStorePutListener {
     boolean hookPlanetFile(String name) {
         if (Constants.FILE_PLANET.equals(name)) {
             return PreferenceManager
-                    .getDefaultSharedPreferences(this.context)
+                    .getDefaultSharedPreferences(this.context.createDeviceProtectedStorageContext())
                     .getBoolean(Constants.PREF_PLANET_USE_CUSTOM, false);
         }
         return false;

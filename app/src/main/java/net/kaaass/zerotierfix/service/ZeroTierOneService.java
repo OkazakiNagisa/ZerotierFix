@@ -92,7 +92,7 @@ public class ZeroTierOneService extends VpnService implements Runnable, EventLis
     private static final String TAG = "ZT1_Service";
     private static final int ZT_NOTIFICATION_TAG = 5919812;
     private final IBinder mBinder = new ZeroTierBinder();
-    private final DataStore dataStore = new DataStore(createDeviceProtectedStorageContext());
+    private final DataStore dataStore = new DataStore();
     private final EventBus eventBus = EventBus.getDefault();
     private final Map<Long, VirtualNetworkConfig> virtualNetworkConfigMap = new HashMap();
     FileInputStream in;
