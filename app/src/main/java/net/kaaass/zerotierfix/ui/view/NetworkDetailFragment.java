@@ -204,7 +204,7 @@ public class NetworkDetailFragment extends Fragment {
         }
 
         boolean disableIpv6 = PreferenceManager
-                .getDefaultSharedPreferences(getActivity())
+                .getDefaultSharedPreferences(getActivity().createDeviceProtectedStorageContext())
                 .getBoolean(Constants.PREF_NETWORK_DISABLE_IPV6, false);
 
         try {

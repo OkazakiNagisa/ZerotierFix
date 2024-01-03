@@ -544,7 +544,7 @@ public class NetworkListFragment extends Fragment {
             // 启动网络
             var context = requireContext();
             boolean useCellularData = PreferenceManager
-                    .getDefaultSharedPreferences(context)
+                    .getDefaultSharedPreferences(context.createDeviceProtectedStorageContext())
                     .getBoolean(Constants.PREF_NETWORK_USE_CELLULAR_DATA, false);
             var activeNetworkInfo = ((ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE))
@@ -601,7 +601,7 @@ public class NetworkListFragment extends Fragment {
      */
     private void showNoNotificationAlertDialog() {
         // 检查是否选择过 “不再提示”，若是则不显示
-        var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext().createDeviceProtectedStorageContext());
 
         if (sharedPreferences.getBoolean(Constants.PREF_DISABLE_NO_NOTIFICATION_ALERT, false)) {
             return;

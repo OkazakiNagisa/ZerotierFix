@@ -357,7 +357,7 @@ public class ZeroTierOneService extends VpnService implements Runnable, EventLis
         this.networkId = networkId;
 
         // 检查当前的网络环境
-        var preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        var preferences = PreferenceManager.getDefaultSharedPreferences(this.createDeviceProtectedStorageContext());
         boolean useCellularData = preferences.getBoolean(Constants.PREF_NETWORK_USE_CELLULAR_DATA, false);
         this.disableIPv6 = preferences.getBoolean(Constants.PREF_NETWORK_DISABLE_IPV6, false);
         var currentNetworkInfo = NetworkInfoUtils.getNetworkInfoCurrentConnection(this);

@@ -14,7 +14,7 @@ public class StartupReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG, "Received: " + intent.getAction() + ". Starting ZeroTier One service.");
-        var pref = PreferenceManager.getDefaultSharedPreferences(context);
+        var pref = PreferenceManager.getDefaultSharedPreferences(context.createDeviceProtectedStorageContext());
         if (pref.getBoolean(Constants.PREF_GENERAL_START_ZEROTIER_ON_BOOT, true)) {
             Log.i(TAG, "Preferences set to start ZeroTier on boot");
         } else {

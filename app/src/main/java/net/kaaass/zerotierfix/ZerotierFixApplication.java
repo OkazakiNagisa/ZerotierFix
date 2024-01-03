@@ -21,7 +21,7 @@ public class ZerotierFixApplication extends MultiDexApplication {
         Log.i("Application", "Starting Application");
         // 创建 DAO 会话
         this.mDaoSession = new DaoMaster(
-                new ZTOpenHelper(this, "ztfixdb", null)
+                new ZTOpenHelper(this.createDeviceProtectedStorageContext(), "ztfixdb", null)
                         .getWritableDatabase()
         ).newSession();
     }

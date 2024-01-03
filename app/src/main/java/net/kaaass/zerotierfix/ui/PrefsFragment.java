@@ -292,7 +292,7 @@ public class PrefsFragment extends PreferenceFragmentCompat implements SharedPre
      * 更新 Planet 设置选项
      */
     private void updatePlanetSetting() {
-        boolean useCustom = PreferenceManager.getDefaultSharedPreferences(getContext())
+        boolean useCustom = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext())
                 .getBoolean(Constants.PREF_PLANET_USE_CUSTOM, false);
         this.prefSetPlanetFile.setEnabled(useCustom);
     }

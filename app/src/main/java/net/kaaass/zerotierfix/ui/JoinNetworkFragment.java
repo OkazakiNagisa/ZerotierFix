@@ -117,7 +117,7 @@ public class JoinNetworkFragment extends Fragment implements CustomDNSListener {
             public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
                 if (JoinNetworkFragment.this.mDefaultRouteCheckBox.isEnabled()) {
                     String obj = JoinNetworkFragment.this.mNetworkIdTextView.getText().toString();
-                    SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(JoinNetworkFragment.this.getActivity());
+                    SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(JoinNetworkFragment.this.getActivity().createDeviceProtectedStorageContext());
                     SharedPreferences.Editor edit = defaultSharedPreferences.edit();
                     Set<String> stringSet = defaultSharedPreferences.getStringSet("default_route_enabled_networks", null);
                     if (z) {
