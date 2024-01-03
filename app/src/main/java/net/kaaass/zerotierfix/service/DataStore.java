@@ -28,7 +28,7 @@ public class DataStore implements DataStoreGetListener, DataStorePutListener {
     private final Context context;
 
     public DataStore(Context context) {
-        this.context = context;
+        this.context = context.createDeviceProtectedStorageContext();
     }
 
     @Override

@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZerotierFix"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:directBootAware="true">
         <service
             android:name=".service.ZeroTierOneService"
             android:enabled="true"
