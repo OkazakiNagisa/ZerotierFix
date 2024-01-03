@@ -20,23 +20,23 @@ jobs:
           output-path: app-debug.apk
           fastlane-env: "debug"
       - uses: actions/upload-artifact@v3
-        if: github.event_name == 'pull_request'
+        # if: github.event_name == 'pull_request'
         name: Upload app APK
         with:
           name: App bundle
           path: app-debug.apk
-      - uses: r0adkll/sign-android-release@v1
-        if: github.event_name != 'pull_request'
-        name: Sign app APK
-        id: sign_app
-        with:
-          releaseDirectory: .
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-      - uses: actions/upload-artifact@v3
-        if: github.event_name != 'pull_request'
-        name: Upload signed app APK
-        with:
-          name: Signed app bundle
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+      # - uses: r0adkll/sign-android-release@v1
+      #   if: github.event_name != 'pull_request'
+      #   name: Sign app APK
+      #   id: sign_app
+      #   with:
+      #     releaseDirectory: .
+      #     signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+      #     alias: ${{ secrets.ALIAS }}
+      #     keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+      # - uses: actions/upload-artifact@v3
+      #   if: github.event_name != 'pull_request'
+      #   name: Upload signed app APK
+      #   with:
+      #     name: Signed app bundle
+      #     path: ${{steps.sign_app.outputs.signedReleaseFile}}
