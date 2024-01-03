@@ -358,8 +358,8 @@ public class ZeroTierOneService extends VpnService implements Runnable, EventLis
 
         // 检查当前的网络环境
         var preferences = PreferenceManager.getDefaultSharedPreferences(this.createDeviceProtectedStorageContext());
-        boolean useCellularData = preferences.getBoolean(Constants.PREF_NETWORK_USE_CELLULAR_DATA, false);
-        this.disableIPv6 = preferences.getBoolean(Constants.PREF_NETWORK_DISABLE_IPV6, false);
+        boolean useCellularData = preferences.getBoolean(Constants.PREF_NETWORK_USE_CELLULAR_DATA, true);
+        this.disableIPv6 = preferences.getBoolean(Constants.PREF_NETWORK_DISABLE_IPV6, true);
         var currentNetworkInfo = NetworkInfoUtils.getNetworkInfoCurrentConnection(this);
 
         if (currentNetworkInfo == NetworkInfoUtils.CurrentConnection.CONNECTION_NONE) {
